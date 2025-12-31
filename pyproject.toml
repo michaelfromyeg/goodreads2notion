@@ -1,0 +1,53 @@
+[project]
+name = "goodreads2notion"
+version = "0.1.0"
+description = "Sync Goodreads library data to Notion"
+readme = "README.md"
+authors = [
+    { name = "Michael DeMarco", email = "michaelfromyeg@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.0",
+    "pydantic>=2.0",
+    "click>=8.0",
+    "python-dotenv>=1.0",
+]
+
+[project.scripts]
+goodreads2notion = "goodreads2notion.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.8",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src"]
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # Pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "UP",     # pyupgrade
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["goodreads2notion"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
